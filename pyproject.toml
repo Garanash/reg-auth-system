@@ -1,0 +1,23 @@
+[project]
+name = "reg-auth-system"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "a.dolgov",email = "dolgov_am@mail.ru"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard] (>=0.115.12,<0.116.0)",
+    "pydantic[email] (>=2.11.2,<3.0.0)",
+    "sqlalchemy[asyncio] (>=2.0.40,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+
