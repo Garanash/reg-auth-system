@@ -3,6 +3,8 @@ from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
 from .schemas import UserCreate, UserUpdatePartial, UserSchema
 from core.models import User
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 
 
 async def get_users(session: AsyncSession):
@@ -14,6 +16,11 @@ async def get_users(session: AsyncSession):
 
 async def get_user(session: AsyncSession, user_id: int):
     return await session.get(User, user_id)
+
+async def get_user_by_username(session: AsyncSession, username: str):
+    query = select(User).filter_by(username=username).limit(1)
+    result = await session.scalars(query)
+    return result.first()
 
 
 async def create_user(session: AsyncSession, user_in: UserCreate):

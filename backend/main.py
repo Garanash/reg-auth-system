@@ -14,13 +14,11 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(lifespan=lifespan,
+              description="Система регистрации и авторизации для платформы ИИ-помощников. Собрана система авторизации на JWT токенах.\n "
+                          "База данных sqlite. По всем вопросам обращаться в  тг: @Garanash \n",
+              title='ALMAZGEOBUR AI Agent')
 app.include_router(router_v1, prefix='/api_v1')
 
-@app.get("/")
-def read_root():
-    return "main page"
-
 if __name__ == "__main__":
-    uvicorn.run(app, port=8001)
-
+    uvicorn.run("main:app", port=8001, reload=True)
