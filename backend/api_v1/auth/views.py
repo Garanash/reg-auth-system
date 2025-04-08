@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from .config_authx import security, config
 
-router = APIRouter(tags=['login'])
+router = APIRouter(tags=['login JWT'])
 
 
 @router.post('/login')
