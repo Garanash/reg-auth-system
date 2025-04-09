@@ -1,6 +1,6 @@
 from .users.views import router as user_router
 from .auth.views import router as auth_router
-from .demo_auth.views import router as demo_auth_router
+from .new_auth.views import router as demo_auth_router
 from fastapi import APIRouter
 
 router = APIRouter()

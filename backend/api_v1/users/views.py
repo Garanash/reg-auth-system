@@ -11,29 +11,29 @@ from ..auth.config_authx import security
 router = APIRouter(prefix='/user', tags=['Users'])
 
 
-@router.get('/', response_model=list[UserSchema], dependencies=[Depends(security.access_token_required)])
+@router.get('/', response_model=list[UserSchema])
 async def get_users(session: AsyncSession = Depends(db_helper.scoped_session_dependency)):
     return await crud.get_users(session=session)
 
 
-@router.post('/', dependencies=[Depends(security.access_token_required)])
+@router.post('/')
 async def create_user(user_in: UserCreate, session: AsyncSession = Depends(db_helper.session_dependency)):
     return await crud.create_user(session=session, user_in=user_in)
 
 
-@router.get('/{user_id}/', response_model=UserSchema, dependencies=[Depends(security.access_token_required)])
+@router.get('/{user_id}/', response_model=UserSchema)
 async def get_user_by_id(user: User = Depends(user_by_id)):
     return user
 
 
-@router.patch('/{user_id}/', dependencies=[Depends(security.access_token_required)])
+@router.patch('/{user_id}/')
 async def update_user(user_update: UserUpdatePartial,
                       user: User = Depends(user_by_id),
                       session: AsyncSession = Depends(db_helper.session_dependency)):
     return await crud.update_user_partial(user_in=user_update, user_up=user, session=session)
 
 
-@router.delete('/{user_id}/', dependencies=[Depends(security.access_token_required)])
+@router.delete('/{user_id}/')
 async def delete_user(
         user: User = Depends(user_by_id),
         session: AsyncSession = Depends(db_helper.session_dependency)
